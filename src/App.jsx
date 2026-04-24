@@ -52,6 +52,7 @@ export default function App() {
       <Canvas camera={{ position: [0, 2, 5] }}>
         <PointerLockControls />
         <ambientLight intensity={0.5} />
+        <Environment preset="city" />
         <Physics>
           <Player />
           {/* 바닥 */}
