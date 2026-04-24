@@ -33,6 +33,10 @@ function Player() {
 
   return (
     <RigidBody ref={rigidBody} colliders={false} position={[0, 1, 0]}>
+      <mesh castShadow>
+        <capsuleGeometry args={[0.5, 0.5]} />
+        <meshStandardMaterial color="mediumpurple" />
+      </mesh>
       <CapsuleCollider args={[0.5, 0.5]} />
     </RigidBody>
   );
@@ -49,15 +53,16 @@ export default function App() {
         { name: "right", keys: ["ArrowRight", "d"] },
       ]}
     >
-      <Canvas camera={{ position: [0, 2, 5] }}>
+      <Canvas shadows camera={{ position: [0, 2, 5] }}>
         <PointerLockControls />
         <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 10, 5]} intensity={1.5} castShadow />
         <Environment preset="city" />
         <Physics>
           <Player />
           {/* 바닥 */}
           <RigidBody type="fixed">
-            <mesh rotation={[-Math.PI / 2, 0, 0]}>
+            <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
               <planeGeometry args={[20, 20]} />
               <meshStandardMaterial color="gray" />
             </mesh>
